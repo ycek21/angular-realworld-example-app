@@ -7,18 +7,20 @@ import { SharedModule } from '../shared';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'editor',
     component: EditorComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard], children: [
+      {
+        path: ':slug',
+        component: EditorComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          article: EditableArticleResolver
+        }
+      }
+    ]
   },
-  {
-    path: ':slug',
-    component: EditorComponent,
-    canActivate: [AuthGuard],
-    resolve: {
-      article: EditableArticleResolver
-    }
-  }
+  
 ];
 
 @NgModule({
