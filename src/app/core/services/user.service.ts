@@ -54,6 +54,12 @@ export class UserService {
     this.isAuthenticatedSubject.next(false);
   }
 
+  purgeAuthSsr() {
+    this.currentUserSubject.next({} as User);
+    // Set auth status to false
+    this.isAuthenticatedSubject.next(false);
+  }
+
   attemptAuth(type, credentials): Observable<User> {
     const route = (type === 'login') ? '/login' : '';
     return this.apiService.post('/users' + route, {user: credentials})

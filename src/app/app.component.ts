@@ -9,15 +9,13 @@ import {isPlatformBrowser} from '@angular/common'
 })
 export class AppComponent implements OnInit {
   constructor(private userService: UserService,
-    @Inject(PLATFORM_ID) private platformId,
-    
-    
-    ) {}
+    @Inject(PLATFORM_ID) private platformId) {}
 
   ngOnInit() {
     if(isPlatformBrowser(this.platformId)){
       this.userService.populate();
+    }else {
+    this.userService.purgeAuthSsr();
     }
-    console.log('Hello from AppComponent Init :>> ', );
   }
 }
